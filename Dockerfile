@@ -5,4 +5,4 @@ RUN apt-get update && \
 ADD . /app
 WORKDIR /app
 RUN npm install
-CMD node index.js
+ENTRYPOINT [ "entrypoint.sh" ]

@@ -1,11 +1,10 @@
 const hostname = process.env.MQTT_HOSTNAME || 'mqtt://test.mosquitto.org'
 const topic = process.env.MQTT_TOPIC
-// const content = `asdasdasd
-// asdasd`
+
 const uuidv1 = require('uuid/v1');
 const fs = require('fs-extra')
-
 const git = require('simple-git/promise');
+const mqtt = require('mqtt')
 
 async function saveFile(topic, message) {
     const topicParts = topic.split(':');
@@ -23,8 +22,10 @@ async function saveFile(topic, message) {
     console.log(topic)
 }
 
-const mqtt = require('mqtt')
-const client  = mqtt.connect(hostname)
+const client  = mqtt.connect(hostname, {
+    username: process.env.MQTT_USERNAME,
+    password: process.env.MQTT_PASSWORD
+})
  
 client.on('connect', function () {
   client.subscribe(topic);
