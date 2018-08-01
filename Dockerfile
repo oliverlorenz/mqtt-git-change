@@ -5,4 +5,4 @@ RUN apt-get update && \
 ADD . /app
 WORKDIR /app
 RUN npm install
-ENTRYPOINT [ "entrypoint.sh" ]
+CMD bash entrypoint.sh
